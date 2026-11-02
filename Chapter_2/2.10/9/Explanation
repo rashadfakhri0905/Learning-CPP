@@ -1,0 +1,290 @@
+
+/*
+============================================================
+                  THE SCOPE OF #DEFINE
+============================================================
+
+1. WHAT IS THE SCOPE OF #DEFINE?
+------------------------------------------------------------
+
+DEFINITION:
+#define is a preprocessor directive used to define a macro.
+
+Unlike variables and functions, macros do not follow C++
+scope rules such as local scope or global scope.
+
+The preprocessor processes directives in order, from top
+to bottom, after accounting for included files.
+
+A macro is available from the point where it is defined
+until it is undefined or the end of the preprocessing
+translation unit.
+
+IMPORTANT:
+The preprocessor does not understand C++ functions,
+classes, or blocks in the same way the compiler does.
+
+============================================================
+2. #DEFINE INSIDE A FUNCTION
+============================================================
+
+EXAMPLE:
+*/
+
+#include <iostream>
+
+void foo()
+{
+    #define MY_NAME "Alex"
+}
+
+int main()
+{
+    std::cout << "My name is: " << MY_NAME << '\n';
+
+    return 0;
+}
+
+/*
+OUTPUT:
+My name is: Alex
+
+EXPLANATION:
+1. The preprocessor processes the file before compilation.
+2. It encounters #define MY_NAME "Alex" inside foo().
+3. The preprocessor does not treat this as a function-local
+   definition.
+4. MY_NAME is available from its definition to the end of
+   the preprocessing translation unit.
+5. Therefore, MY_NAME in main() is replaced with "Alex".
+
+BEST PRACTICE:
+Define macros outside functions to avoid confusion.
+
+============================================================
+3. #INCLUDE AND MACRO DEFINITIONS
+============================================================
+
+DEFINITION:
+#include inserts the contents of the specified file into
+the current source file during preprocessing.
+
+Any directives in the included file are processed as part
+of the resulting source.
+
+EXAMPLE:
+
+FILE: Alex.h
+
+    #define MY_NAME "Alex"
+
+FILE: main.cpp
+
+    #include "Alex.h"
+    #include <iostream>
+
+    int main()
+    {
+        std::cout << "My name is: "
+                  << MY_NAME << '\n';
+
+        return 0;
+    }
+
+OUTPUT:
+My name is: Alex
+
+EXPLANATION:
+1. Alex.h contains the definition of MY_NAME.
+2. #include "Alex.h" makes that definition available in
+   main.cpp during preprocessing.
+3. MY_NAME is replaced with "Alex".
+4. The program prints the message.
+
+IMPORTANT:
+Quoted includes such as #include "Alex.h" are commonly
+used for project header files.
+
+============================================================
+4. MACRO DEFINITIONS IN MULTIPLE SOURCE FILES
+============================================================
+
+IMPORTANT CONCEPT:
+Each source file is normally preprocessed independently.
+
+A macro defined in one .cpp file does not automatically
+become available in another .cpp file.
+
+EXAMPLE:
+
+FILE: function.cpp
+
+    #include <iostream>
+
+    void doSomething()
+    {
+        #ifdef PRINT
+            std::cout << "Printing!\n";
+        #endif
+
+        #ifndef PRINT
+            std::cout << "Not printing!\n";
+        #endif
+    }
+
+FILE: main.cpp
+
+    void doSomething();
+
+    #define PRINT
+
+    int main()
+    {
+        doSomething();
+        return 0;
+    }
+
+OUTPUT:
+Not printing!
+
+EXPLANATION:
+1. main.cpp defines PRINT.
+2. function.cpp is preprocessed separately.
+3. PRINT is not defined in function.cpp.
+4. Therefore, #ifdef PRINT excludes "Printing!".
+5. #ifndef PRINT includes "Not printing!".
+6. The function prints "Not printing!".
+
+IMPORTANT:
+The order of source files in the compilation command does
+not make macros automatically shared between them.
+
+============================================================
+5. HOW CAN A MACRO BE SHARED BETWEEN FILES?
+============================================================
+
+METHOD 1: DEFINE THE MACRO IN A HEADER FILE
+
+FILE: config.h
+
+    #define PRINT
+
+FILE: main.cpp
+
+    #include "config.h"
+
+FILE: function.cpp
+
+    #include "config.h"
+
+Both source files now receive the definition through the
+header file.
+
+METHOD 2: DEFINE THE MACRO IN THE COMPILER COMMAND
+
+For example, with GCC or G++:
+
+    g++ -DPRINT main.cpp function.cpp -o program
+
+The -DPRINT option defines PRINT for preprocessing the
+source files in this compilation command.
+
+NOTE:
+A macro defined in a source file does not affect another
+source file just because both are linked into one program.
+
+============================================================
+6. #UNDEF DIRECTIVE
+============================================================
+
+DEFINITION:
+#undef removes a macro definition from the point where
+the directive is processed onward.
+
+EXAMPLE:
+*/
+
+#include <iostream>
+
+#define VALUE 10
+
+int main()
+{
+    std::cout << VALUE << '\n';
+
+    #undef VALUE
+
+    #ifdef VALUE
+        std::cout << "VALUE is defined\n";
+    #else
+        std::cout << "VALUE is not defined\n";
+    #endif
+
+    return 0;
+}
+
+/*
+OUTPUT:
+10
+VALUE is not defined
+
+EXPLANATION:
+1. VALUE is initially defined as 10.
+2. The first statement prints 10.
+3. #undef VALUE removes the macro definition.
+4. #ifdef VALUE is now false.
+5. The program prints "VALUE is not defined".
+
+============================================================
+7. IMPORTANT DISTINCTION: MACRO VS VARIABLE SCOPE
+============================================================
+
+VARIABLE:
+
+    void foo()
+    {
+        int number = 10;
+    }
+
+    // number cannot be accessed here
+
+The variable number has local scope and exists only within
+the function body.
+
+MACRO:
+
+    void foo()
+    {
+        #define NUMBER 10
+    }
+
+    // NUMBER can still be expanded here
+
+The macro is not limited to the function body.
+
+Remember:
+Variables follow C++ scope and lifetime rules.
+Macros follow preprocessor definition and removal rules.
+
+============================================================
+8. KEY POINTS TO REMEMBER
+============================================================
+
+1. Preprocessor directives are processed before compilation.
+2. The preprocessor processes directives in order.
+3. A #define inside a function is not function-local.
+4. A macro is available after its definition until it is
+   undefined or the preprocessing translation unit ends.
+5. #include can bring macro definitions from a header file.
+6. Separate .cpp files are normally preprocessed separately.
+7. A macro in one .cpp file does not automatically affect
+   another .cpp file.
+8. A shared header or compiler option such as -DPRINT can
+   define a macro for multiple source files.
+9. #undef removes a macro definition.
+10. Defining macros outside functions is generally clearer.
+
+============================================================
+                    END OF NOTES
+============================================================
+*/
