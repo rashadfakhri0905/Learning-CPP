@@ -1,0 +1,7 @@
+                                    // Objects and Variables //
+
+-> In C++,, direct memory access is discouraged.
+-> An object represents a region of storage (typically RAM or a CPU register) that can hold value.
+-> This helps reduce the worry of locating data from a particular region of storage in RAM or CPU register.
+-> An object with a name is called variable.
+-> A variable is an object that has a name (identifier).

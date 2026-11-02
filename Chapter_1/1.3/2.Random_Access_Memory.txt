@@ -1,0 +1,6 @@
+                                           // RAM //
+
+->   The main memory is a computer is RAM.
+->   When we run a program the OS loads it in RAM.
+->   The OS reserves some storage in RAM for the program to use while running. 
+->   It stores data so that it can be used later on while the progra is runnig.
