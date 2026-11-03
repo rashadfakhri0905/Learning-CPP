@@ -51,6 +51,13 @@ int totalMarks(int x, int y, int z, int a, int b)
     return total;
 }
 
+int averageMakrs(int x)
+{
+    int average{};
+    average = x/5;
+    return average;
+}
+
 int marksCalculator()
 {
     int phy{ physics() };
@@ -60,8 +67,5 @@ int marksCalculator()
     int cs{ computerScience() };
 
     int total{ totalMarks(phy, math, chem, cs, eng) };
-
-    std::cout << "Your Total Marks Are: " << total << '\n';
-    std::cout << "Your Average Marks Are: " << total / 5 << '\n';
-    std::cout << "Your Percentage is: " << total*100/5 << '\n';
+    int avg {averageMakrs(total)};
 }
