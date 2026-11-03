@@ -1,4 +1,4 @@
-```
+
 // HEADER GUARDS (INCLUDE GUARDS)
 
 // Purpose:
@@ -31,4 +31,3 @@
 // unit. They do not prevent multiple-definition errors caused by
 // defining non-inline functions in headers included by multiple
 // translation units.
-```
