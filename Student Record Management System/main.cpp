@@ -1,8 +1,9 @@
 #include <iostream>
-#include "student_report.h"
+#include "headers/student_report.h"
 
 int main()
 {
+    int choice;
     std::cout << "=====================================  \n";
     std::cout << "STUDENT RECORD MANAGEMENT SYSTEM       \n";
     std::cout << "=====================================  \n";
@@ -17,4 +18,9 @@ int main()
     std::cout << "8. Exit                                \n";
     std::cout << "                                       \n";
     std::cout << "Enter your choice:" << '\n';
+    std::cin >> choice;
+
+    int calculatedMarks();
+
+    return 0;
 }
