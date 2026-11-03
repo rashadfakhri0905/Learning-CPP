@@ -1,4 +1,5 @@
 #ifndef ASK_MARKS_H
+#define ASK_MARKS_H
 
 int askPhysicsMarks();
 int askChemistryMarks();
