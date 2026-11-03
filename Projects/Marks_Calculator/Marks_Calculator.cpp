@@ -1,5 +1,3 @@
-                                //Cumilative Project 1.1 - 2.4//
-
 #include <iostream>
 int physics()
 {
@@ -28,21 +26,42 @@ int chemistry()
     return chem;
 }
 
-int totalMarks(int x, int y, int z)
+int english()
+{
+    int eng{};
+    std::cout << "Enter your English Marks: ";
+    std::cin >> eng;
+
+    return eng;
+}
+
+int computerScience()
+{
+    int cs{};
+    std::cout << "Enter your Computer Science Marks: ";
+    std::cin >> cs;
+
+    return cs;
+}
+
+int totalMarks(int x, int y, int z, int a, int b)
 {
     int total{};
-    total = x + y + z;
+    total = x + y + z + a + b;
     return total;
 }
 
-int main()
+int marksCalculator()
 {
     int phy{ physics() };
     int math{ maths() };
     int chem{ chemistry() };
+    int eng{ english() };
+    int cs{ computerScience() };
 
-    int total{ totalMarks(phy, math, chem) };
+    int total{ totalMarks(phy, math, chem, cs, eng) };
 
     std::cout << "Your Total Marks Are: " << total << '\n';
-    std::cout << "Your Average Marks Are: " << total / 3 << '\n';
+    std::cout << "Your Average Marks Are: " << total / 5 << '\n';
+    std::cout << "Your Percentage is: " << total*100/5 << '\n';
 }
