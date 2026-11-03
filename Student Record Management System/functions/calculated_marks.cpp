@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Student_Management_System/headers/ask_marks.h"
-#include "Student_Management_System/headers/calculated_marks.h"
+#include "../headers/ask_marks.h"
+#include "../headers/calculated_marks.h"
 
 int totalMarks(int x, int y, int z, int a, int b)
 {

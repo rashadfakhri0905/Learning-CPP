@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Student_Management_System/headers/ask_marks.h"
+#include "../headers/ask_marks.h"
 
 int askPhysicsMarks()
 {
