@@ -40,7 +40,7 @@ int main()
     else
         std::cout << "The number is neither positive nor negative.\n";
 
-    // Boolean-returning function
+    // Boolean-returning function. This is carried out only if the number is even.
     if (isEven(number))
         std::cout << "Even number check returned true.\n";
 
