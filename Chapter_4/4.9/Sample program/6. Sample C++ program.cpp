@@ -47,14 +47,12 @@ int main()
 
     //Some addition
 
-    int x {};
-
     std::cout << "Enter an integer: ";
+    int x {};
     std::cin >> std::boolalpha >> x ;
 
-    int y {};
-
     std::cout << "Enter another integer: ";
+    int y {};
     std::cin >> std::boolalpha >> y ;
 
     std::cout << "Are x and y equal?" << std:: boolalpha 
