@@ -21,16 +21,16 @@ int add(int x, int y)
 {
     return x + y;
 }
-
+/*
 int add(int x, int y) // ❌ ODR violation: defined twice
 {
     return x + y;
 }
-
+*/
 int main()
 {
     int x{};
-    int x{5}; // ❌ ODR violation: x defined twice
+    // int x{5}; // ❌ ODR violation: x defined twice
 }
 
 /* ### Different scopes are OK
